@@ -1,6 +1,8 @@
 (() => {
   const stepElems = document.querySelectorAll('.step');
   const graphicElems = document.querySelectorAll('.graphic-item');
+  // 현재 활성화된(visible 클래스가 붙은) .graphic-item을 지정
+  let currentItem = graphicElems[0];
 
   for (let i = 0; i < stepElems.length; i++) {
     //stepElemsp[i].setAttribute('data-index', i);
@@ -23,8 +25,15 @@
         boundingRect.top < window.innerHeight * 0.8
       ) {
         //console.log(step.dataset.index);
-        graphicElems[step.dataset.index].classList.add('visible');
+
+        if (currentItem) {
+          // currentItem이 이미 존재하면 제거
+          currentItem.classList.remove('visible');
+        }
+        currentItem = graphicElems[step.dataset.index];
+        currentItem.classList.add('visible');
       }
     }
   });
+  currentItem.classList.add('visible');
 })();
