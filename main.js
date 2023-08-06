@@ -1,4 +1,17 @@
 (() => {
+  const actions = {
+    // bird 클래스 가지고 있는 위치에서 birdFlies() 함수 실행하도록 작성
+    birdFlies(key) {
+      if (key) {
+        document.querySelector(
+          '[data-index="2"] .bird'
+        ).style.transform = `translateX(${window.innerWidth}px)`;
+      } else {
+        document.querySelector('[data-index="2"] .bird').style.transform = `translateX(-100%)`;
+      }
+    },
+  };
+
   const stepElems = document.querySelectorAll('.step');
   const graphicElems = document.querySelectorAll('.graphic-item');
   // 현재 활성화된(visible 클래스가 붙은) .graphic-item을 지정
@@ -21,13 +34,19 @@
   }
 
   // currentItem 화면에 보이게 하는 경우 (visible 클래스 추가)
-  function activate() {
+  function activate(action) {
     currentItem.classList.add('visible');
+    if (action) {
+      actions[action](true);
+    }
   }
 
   // currentItem 화면에서 remove (visible 클래스 제거)
-  function inactivate() {
+  function inactivate(action) {
     currentItem.classList.remove('visible');
+    if (action) {
+      actions[action](false);
+    }
   }
 
   window.addEventListener('scroll', () => {
@@ -49,12 +68,12 @@
         boundingRect.top > window.innerHeight * 0.1 &&
         boundingRect.top < window.innerHeight * 0.8
       ) {
-        inactivate();
+        inactivate(currentItem.dataset.action);
         currentItem = graphicElems[step.dataset.index];
-        activate();
+        activate(currentItem.dataset.action); // currentItem의 data-action값 전달
       }
     }
-    console.log(temp);
+    //console.log(temp);
   });
 
   activate();
