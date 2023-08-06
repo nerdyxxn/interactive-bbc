@@ -10,6 +10,16 @@
     graphicElems[i].dataset.index = i;
   }
 
+  // currentItem 화면에 보이게 하는 경우 (visible 클래스 추가)
+  function activate() {
+    currentItem.classList.add('visible');
+  }
+
+  // currentItem 화면에서 remove (visible 클래스 제거)
+  function inactivate() {
+    currentItem.classList.remove('visible');
+  }
+
   window.addEventListener('scroll', () => {
     // stepElems 말풍선들의 위치 체크해서 이벤트 핸들링 (위치 범위 안에 들어왔을 때 활성화)
     let step;
@@ -24,16 +34,11 @@
         boundingRect.top > window.innerHeight * 0.1 &&
         boundingRect.top < window.innerHeight * 0.8
       ) {
-        //console.log(step.dataset.index);
-
-        if (currentItem) {
-          // currentItem이 이미 존재하면 제거
-          currentItem.classList.remove('visible');
-        }
+        inactivate();
         currentItem = graphicElems[step.dataset.index];
-        currentItem.classList.add('visible');
+        activate();
       }
     }
   });
-  currentItem.classList.add('visible');
+  activate();
 })();
