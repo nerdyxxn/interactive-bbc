@@ -29,6 +29,7 @@ img {
   position: sticky;
   top: 0;
   height: 100vh;
+  overflow-x: hidden;
 }
 .graphic-item {
   display: flex;
@@ -42,6 +43,7 @@ img {
   opacity: 0;
   transition: 0.5s;
   will-change: opacity;
+  /* will-change 애니메이션 바뀔 것을 미리 브라우저에 알려줘서 더 효율적으로 동작하도록 함 */
 }
 .visible {
   opacity: 1;
@@ -67,4 +69,15 @@ img {
   width: 100px;
   transform: translateX(-100%);
   transition: 1.5s 0.5s linear;
+}
+[data-index='5'] .bird {
+  left: 30%;
+  bottom: 30%;
+}
+.global-footer {
+  padding: 2rem 0;
+  text-align: center;
+}
+.strikethrough {
+  text-decoration: line-through;
 }
